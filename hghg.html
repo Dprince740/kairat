@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div><input type="radio" name="one" value="hello" ></div>
+    <div><input type="radio" name="one" value="www"></div>
+    <script>
+        let radioo= document.querySelectorAll(`input[name="one"]`)
+        radioo.forEach((radio)=>{
+            radio.addEventListener("change",()=>{
+                console.log(radio.value)
+            })
+        })
+        
+    </script>
+</body>
+</html>

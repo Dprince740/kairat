@@ -25,6 +25,7 @@ nav{
     width: 100%;
     z-index: 1099;
 }
+
 .nav2{
     display: none;
     justify-content: space-between;
@@ -36,7 +37,7 @@ nav{
     background-size: cover;
     background-position: center;
     align-items: center;
-    padding: 10px 0px;
+    padding: 00px 0px;
     height: 70px;
      position: fixed;
     width: 100%;
@@ -70,8 +71,8 @@ nav a:hover{
 }
 nav button{
     padding: 7px 15px;
-    margin-right: 50px;
-    font-size: 20px;
+    margin:5px 50px 0px 0px;
+    font-size: 23px;
     border-radius: 12px;
     border: none;
     color: rgb(216, 179, 127);
@@ -343,14 +344,30 @@ nav button:hover{
     color: white;
     margin-top: 20px;
   }
+  .inserted{
+    transition: 0.5s ease;
+    opacity: 1 !important;
+  }
+  .uninserted{
+    transition: 0.5s ease;
+    opacity: 0 !important;
+  }
+  .time{
+    transition: 0.5s ease;
+  }
   @media (0px <=width <= 600px) {
     nav{
         display: none;
     }
     .nav2{
-        display: flex;
+        /* display: none; */
         /* justify-content: space-around; */
         border: 2px solid black;
+    }
+    .navbar a {
+        padding: 0 !important;
+        margin: 0 !important;
+        margin-left: 20px !important;
     }
     .nav2 i{
         padding-right: 20px;
@@ -408,6 +425,7 @@ nav button:hover{
         font-size: 39px;
     }
     .product-container{
+        
         row-gap: 50px;
     }
     .product-card{
@@ -416,6 +434,14 @@ nav button:hover{
     .contact-container{
         flex-direction: column;
     }
+    /* .product-container {
+        width: 80%;
+        align-items: center !important;
+        justify-content: center !important;
+        align-self: center !important;
+        margin-left: 50%;
+        transform: translate(-50%);
+    } */
   }
   @media (600px <=width <= 3000px) {
     nav{

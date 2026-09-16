@@ -1,45 +1,13 @@
-const products=[{
-    image:'./assets/golden-necklace.png',
-    name:'Gold Necklaces',
-    price:'$15.00'
-},{
-    image:'./assets/anklets.png',
-    name:'Golden Anklets',
-    price:'$5.00'
-},{
-    image:'./assets/silver-earring.png',
-    name:'Silver Earring',
-    price:'$8.00'
-},{
-    image:'./assets/diamond-watch.png',
-    name:'Diamond Watch',
-    price:'$25.00'
-},{
-    image:'./assets/gold-fashion-ring.png',
-    name:'Golden Fashion Ring',
-    price:'$14.00'
-},{
-    image:'./assets/golden-earring.png',
-    name:'Golden Earring',
-    price:'$10.00'
-},{
-    image:'./assets/wedding-ring.png',
-    name:'Wedding Ring',
-    price:'$30.00'
-},{
-    image:'./assets/golden-pendant.png',
-    name:'Golden Pendant',
-    price:'$9.00'
-},{
-    image:'./assets/golden-watch.png',
-    name:'Golden Watch',
-    price:'$19.00'
-},{
-    image:'./assets/silver-bracelet.png',
-    name:'Silver Bracelet',
-    price:'$14.00'
-}]
+// export { cartArray }
+import { products } from './product.js'
+
+let cart=document.getElementById("cart-increment")
 let publish=''
+// let cartArray=[]
+let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
+
+console.log("INDEX CART:", cartArray);
+
 products.forEach((product)=>{
     publish+=`
      <div class="product-card">
@@ -49,29 +17,75 @@ products.forEach((product)=>{
                     <h3>${product.name}</h3>
                 </div>
                 <div class="product-price">
-                    <h4>${product.price}</h4>
+                    <h4>$${product.price}</h4>
                 </div>
-                <p class="adding" style="display:none;">Added &#10003</p>
-                <button class="adder">Add to cart</button>
+                <h6 class="adding" style="opacity:0">Added &#10003</h6>
+                <button class="adder" data-product-name="${product.name}">Add to cart</button>
             </div>`
+    console.log(publish)
+    // console.log(product)
 })
+
 document.querySelector(".js-product-container").innerHTML=publish
+
 
 document.querySelectorAll(".adder").forEach((button)=>{
     button.addEventListener("click",()=>{
         // alert("hello")
-        if(button.innerHTML==="Add to cart"){
-            button.innerHTML="Adding..."
-            setTimeout(()=>{
-                alert("Product Added" )
-                button.innerHTML="Remove from cart "
-            },2000)
+        // let productCard=button.closest(".product-card")
+        // let addedText=productCard.querySelector(".adding")
+        // if(button.innerHTML==="Add to cart"){
+        //     button.innerHTML="Adding..."
+        //     setTimeout(()=>{
+        //         // alert("Product Added" )
+        //       addedText.classList.add("inserted")
+        //         button.innerHTML="Remove from cart "
+        //     },1000)
+        //     setTimeout(()=>{
+        //         // alert("Product Added" )
+        //       addedText.classList.remove("inserted")
+        //       addedText.classList.add("time")
+        //         button.innerHTML="Remove from cart "
+        //     },3000)
+        // }else{
+        //     button.innerHTML="Removing..."
+        //     setTimeout(()=>{
+        //         alert("Product Removed")
+        //         button.innerHTML="Add to cart"
+        //     },2000)
+        // }
+        let matching;
+        let namee=button.dataset.productName
+        cartArray.forEach((item)=>{
+            if(namee===item.productname){
+                matching=item
+            }
+            // console.log(matching)
+        })
+        if(matching){
+            matching.quantity+=1
         }else{
-            button.innerHTML="Removing..."
-            setTimeout(()=>{
-                alert("Product Removed")
-                button.innerHTML="Add to cart"
-            },2000)
+            cartArray.push({
+                productname:namee,
+                quantity:1
+            })
         }
+        localStorage.setItem("cart",JSON.stringify(cartArray))
+
+    console.log('hello',localStorage.getItem('cart'))
+
+
+        let cartQuantity=0
+        // cart.innerHTML=cartQuantity
+        cartArray.forEach((item)=>{
+            cartQuantity+=item.quantity
+            cart.innerText=cartQuantity
+            localStorage.setItem("cartquantity",JSON.stringify(cartQuantity))
+        })
+    
+        console.log(cartArray)
+
+       
+
     })
 })
