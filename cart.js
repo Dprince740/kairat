@@ -1,188 +1,632 @@
- import { products } from './product.js'
-//  import { cartArray } from './index.js'
+import { products } from "./product.js";
 
-//  export let cartArray=[
-//     {
-//         image:'./assets/golden-necklace.png',
-//         name:'Gold Necklaces',
-//         quantity:2
-//     },{
-//         image:'./assets/anklets.png',
-//         name:'Golden Anklets',
-//         quantity:3
-//     },{
-//         image:'./assets/silver-earring.png',
-//         name:'Silver Earring',
-//         quantity:4
-//     }
-// ]
-let total=0
-let checkoutNum=document.querySelector(".checkoutnum")
-let cartArray=JSON.parse(localStorage.getItem('cart'))
-let summaryItem=document.querySelectorAll(".summaryitem")
-let summaryPrice=document.querySelector(".summaryprice")
-let sumtotal=document.querySelector(".sumtotal")
-let estimatedTax=document.querySelector(".est-tax")
 
-console.log("cart page",cartArray)
-let sum=0
-let estimatedTaxx=0
-let cartHtml=''
-cartArray.forEach((cartItem,index)=>{
-  checkoutNum.innerHTML=cartArray.length
-  summaryItem.forEach((item)=>{
-    item.innerHTML=cartArray.length
-  })
-    let cart=cartItem.productname
-    let matching;
-    products.forEach((product)=>{
-        if(product.name===cart){
-            matching=product
+/* =========================
+   ELEMENTS
+========================= */
+
+const checkoutNum = document.querySelector(".checkoutnum");
+const summaryItems = document.querySelectorAll(".summaryitem");
+const summaryPrice = document.querySelector(".summaryprice");
+const shippingElement = document.querySelector(".shiping");
+const sumtotal = document.querySelector(".sumtotal");
+const estimatedTax = document.querySelector(".est-tax");
+const totalElement = document.querySelector(".totall");
+const displayHtml = document.querySelector(".display-html");
+
+
+/* =========================
+   GET CART
+========================= */
+
+let cartArray = JSON.parse(localStorage.getItem("cart")) || [];
+
+
+/* =========================
+   FIND PRODUCT
+========================= */
+
+function findProduct(productName) {
+
+    return products.find((product) => {
+        return product.name === productName;
+    });
+
+}
+
+
+/* =========================
+   CALCULATE CART TOTAL
+========================= */
+
+function getCartTotal() {
+
+    let total = 0;
+
+    cartArray.forEach((cartItem) => {
+
+        const product = findProduct(cartItem.productname);
+
+        if (product) {
+
+            total += product.price * cartItem.quantity;
+
         }
-    })
 
-    
-      sum+=matching.price * cartItem.quantity
-      summaryPrice.innerHTML=`$${sum}`
-      sumtotal.innerHTML=`$${sum}`
-      estimatedTaxx=Number(((10/100)*sum).toFixed(2))
-      estimatedTax.innerHTML=`$${estimatedTaxx}`
-      
-    
+    });
 
-    cartHtml+=
-    `
-    <div class="row mt-2 delivery-container-parent pe-4" main-${matching.name}  style="">
-                    <div class=" col-8 border border-4 my-5 " style="">
-                        <h3 class="delivery-date-shipping">Delivery date:</h3>
-                        <div class="row d-flex gap-2 ps-3 mt-4">
-                            <div class="col-4 border border-3" style=""><img class="img-fluid" src="${matching.image}" alt=""></div>
-                            <div class="col-7 border border-3">
-                                <h1 class="fs-5">${matching.name}</h1>
-                                <h2 class="fs-5 text-danger">$${matching.price}</h2>
-                                <h3 class="fs-5">Quantity: <span>${cartItem.quantity}</span></h3>
-                                <h5 class="text-primary"><span class="update-quantity" data-product-name="${matching.name}">Update</span>  <span onclick="deletee()" class="del" style="cursor:pointer;" data-product-name="${matching.name}">Delete</span></h5>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="col-4 border border-4  deliveryy  " style="margin-top: 90px;margin-bottom: 100px;">
-                            <div class="delivery-container py-3">
+    return total;
 
-                                <h6 class="fs-5">Choose a delivery option:</h6>
-                              
-                                <!-- Option 1 -->
-                                <div class="delivery-option d-flex align-items-center">
-                                  <input type="radio" name="${matching.name}" value="free" id="free" ">
-                                  <label for="free">
-                                    <div class="delivery-date">Tuesday, June 21</div>
-                                    <div class="delivery-price free">FREE Shipping</div>
-                                  </label>
-                                </div>
-                              
-                                <!-- Option 2 -->
-                                <div class="delivery-option d-flex align-items-center">
-                                  <input type="radio" name="${matching.name}" value="$4.99" id="fast">
-                                  <label for="fast">
-                                    <div class="delivery-date">Wednesday, June 15</div>
-                                    <div class="delivery-price">$4.99 - Shipping</div>
-                                  </label>
-                                </div>
-                              
-                                <!-- Option 3 -->
-                                <div class="delivery-option d-flex align-items-center">
-                                  <input type="radio" name="${matching.name}" value="$9.99" id="express">
-                                  <label for="express">
-                                    <div class="delivery-date">Monday, June 13</div>
-                                    <div class="delivery-price">$9.99 - Shipping</div>
-                                  </label>
-                                </div>
-                              </div>
-                        </div>
-                </div>
-    `
-    // let checkedInput=document.querySelector(`input:checked`)
-    // console.log(checkedInput)
-    document.querySelector(".display-html").innerHTML=cartHtml;
+}
 
-    let updateQuantity=document.querySelectorAll(".update-quantity")
-    updateQuantity.forEach((button)=>{
-      button.addEventListener("click",()=>{
-        let productName=button.dataset.productName;
-        let product=cartArray.find((item)=>{
-          return item.productname===productName
-        })
-        let newQuantity=prompt("enter new quantity")
-        newQuantity=Number(newQuantity);
-        product.quantity=newQuantity;
-        location.reload()
-        localStorage.setItem("cart",JSON.stringify(cartArray))
-      })
-    })
 
-    let radios = document.querySelectorAll('input[type="radio"]');
+/* =========================
+   TOTAL QUANTITY
+========================= */
 
-radios.forEach((radio) => {
-    radio.addEventListener("change", () => {
-      let productContainer=radio.closest(".delivery-container-parent");
-      let deliveryDatee=productContainer.querySelector(".delivery-date-shipping")
-        let totalshipping = 0;
+function getTotalQuantity() {
 
-        let selectedRadios = document.querySelectorAll(
+    let quantity = 0;
+
+    cartArray.forEach((cartItem) => {
+
+        quantity += Number(cartItem.quantity);
+
+    });
+
+    return quantity;
+
+}
+
+
+/* =========================
+   SHIPPING TOTAL
+========================= */
+
+function getShippingTotal() {
+
+    let shipping = 0;
+
+    const selectedRadios =
+        document.querySelectorAll(
             'input[type="radio"]:checked'
         );
-        selectedRadios.forEach((radio) => {
 
-            if (radio.value === "free") {
-                totalshipping += 0;
-                deliveryDatee.innerHTML="Delivery date:Tuesday, June 21"
-            } 
-            else if (radio.value === "$4.99") {
-                totalshipping += 4.99;
-                deliveryDatee.innerHTML="Delivery date:Wednessday, June 15"
-            } 
-            else if (radio.value === "$9.99") {
-                totalshipping += 9.99;
-                deliveryDatee.innerHTML="Delivery date:Monday, June 13"
-            }
+    selectedRadios.forEach((radio) => {
+
+        shipping += Number(radio.value);
+
+    });
+
+    return shipping;
+
+}
+
+
+/* =========================
+   UPDATE SUMMARY
+========================= */
+
+function updateSummary() {
+
+    const itemsTotal = getCartTotal();
+
+    const quantity = getTotalQuantity();
+
+    const shipping = getShippingTotal();
+
+    const tax =
+        Number((itemsTotal * 0.10).toFixed(2));
+
+    const orderTotal =
+        itemsTotal + shipping + tax;
+
+
+    /* HEADER */
+
+    checkoutNum.textContent = quantity;
+
+
+    /* SUMMARY ITEMS */
+
+    summaryItems.forEach((item) => {
+
+        item.textContent = quantity;
+
+    });
+
+
+    /* PRICES */
+
+    summaryPrice.textContent =
+        `$${itemsTotal.toFixed(2)}`;
+
+    shippingElement.textContent =
+        shipping.toFixed(2);
+
+    sumtotal.textContent =
+        `$${itemsTotal.toFixed(2)}`;
+
+    estimatedTax.textContent =
+        `$${tax.toFixed(2)}`;
+
+    totalElement.textContent =
+        orderTotal.toFixed(2);
+
+}
+
+
+/* =========================
+   RENDER CART
+========================= */
+
+function renderCart() {
+
+    /* EMPTY CART */
+
+    if (cartArray.length === 0) {
+
+        displayHtml.innerHTML = `
+            <div class="empty-cart">
+
+                <h2>Your cart is empty</h2>
+
+                <p>
+                    Add some products to your cart
+                    before checking out.
+                </p>
+
+            </div>
+        `;
+
+        updateSummary();
+
+        return;
+
+    }
+
+
+    let cartHtml = "";
+
+
+    cartArray.forEach((cartItem, index) => {
+
+        const matching =
+            findProduct(cartItem.productname);
+
+
+        /* PRODUCT DOES NOT EXIST */
+
+        if (!matching) {
+            return;
+        }
+
+
+        cartHtml += `
+
+            <div
+                class="delivery-container-parent"
+                data-index="${index}"
+            >
+
+                <!-- PRODUCT -->
+
+                <div class="cart-product">
+
+                    <h3 class="delivery-date-shipping">
+                        Delivery date: Tuesday, June 21
+                    </h3>
+
+
+                    <div class="product-content">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="product-image">
+
+                            <img
+                                src="${matching.image}"
+                                alt="${matching.name}"
+                            >
+
+                        </div>
+
+
+                        <!-- PRODUCT INFORMATION -->
+
+                        <div class="product-info">
+
+                            <h1 class="product-name">
+                                ${matching.name}
+                            </h1>
+
+
+                            <h2 class="product-price">
+                                $${Number(matching.price).toFixed(2)}
+                            </h2>
+
+
+                            <h3 class="quantity-text">
+
+                                Quantity:
+
+                                <span>
+                                    ${cartItem.quantity}
+                                </span>
+
+                            </h3>
+
+
+                            <div class="product-actions">
+
+                                <span
+                                    class="update-quantity"
+                                    data-product-name="${matching.name}"
+                                >
+                                    Update
+                                </span>
+
+
+                                <span
+                                    class="del"
+                                    data-product-name="${matching.name}"
+                                >
+                                    Delete
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DELIVERY OPTIONS -->
+
+                <div class="deliveryy">
+
+                    <div class="delivery-container">
+
+
+                        <h6 class="delivery-title">
+                            Choose a delivery option:
+                        </h6>
+
+
+                        <!-- FREE -->
+
+                        <div class="delivery-option">
+
+                            <input
+                                type="radio"
+                                name="delivery-${index}"
+                                id="free-${index}"
+                                value="0"
+                                data-date="Tuesday, June 21"
+                                checked
+                            >
+
+                            <label for="free-${index}">
+
+                                <div class="delivery-date">
+                                    Tuesday, June 21
+                                </div>
+
+                                <div class="delivery-price free">
+                                    FREE Shipping
+                                </div>
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- FAST -->
+
+                        <div class="delivery-option">
+
+                            <input
+                                type="radio"
+                                name="delivery-${index}"
+                                id="fast-${index}"
+                                value="4.99"
+                                data-date="Wednesday, June 15"
+                            >
+
+                            <label for="fast-${index}">
+
+                                <div class="delivery-date">
+                                    Wednesday, June 15
+                                </div>
+
+                                <div class="delivery-price">
+                                    $4.99 - Shipping
+                                </div>
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- EXPRESS -->
+
+                        <div class="delivery-option">
+
+                            <input
+                                type="radio"
+                                name="delivery-${index}"
+                                id="express-${index}"
+                                value="9.99"
+                                data-date="Monday, June 13"
+                            >
+
+                            <label for="express-${index}">
+
+                                <div class="delivery-date">
+                                    Monday, June 13
+                                </div>
+
+                                <div class="delivery-price">
+                                    $9.99 - Shipping
+                                </div>
+
+                            </label>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    /* PUT HTML ON PAGE */
+
+    displayHtml.innerHTML = cartHtml;
+
+
+    /* UPDATE SUMMARY */
+
+    updateSummary();
+
+
+    /* =========================
+       UPDATE QUANTITY
+    ========================= */
+
+    document
+        .querySelectorAll(".update-quantity")
+        .forEach((button) => {
+
+            button.addEventListener("click", () => {
+
+                const productName =
+                    button.dataset.productName;
+
+
+                const product =
+                    cartArray.find((item) => {
+
+                        return item.productname === productName;
+
+                    });
+
+
+                if (!product) {
+                    return;
+                }
+
+
+                const newQuantity =
+                    prompt(
+                        "Enter new quantity:",
+                        product.quantity
+                    );
+
+
+                /* CANCEL */
+
+                if (newQuantity === null) {
+                    return;
+                }
+
+
+                const quantity =
+                    Number(newQuantity);
+
+
+                /* VALIDATION */
+
+                if (
+                    !Number.isInteger(quantity) ||
+                    quantity < 1
+                ) {
+
+                    alert(
+                        "Please enter a valid quantity of 1 or more."
+                    );
+
+                    return;
+
+                }
+
+
+                /* UPDATE */
+
+                product.quantity = quantity;
+
+
+                /* SAVE */
+
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(cartArray)
+                );
+
+
+                /* RELOAD */
+
+                location.reload();
+
+            });
 
         });
-        document.querySelector(".shiping").innerHTML= totalshipping;
-        let overallsum=0
-        overallsum=totalshipping+sum+estimatedTaxx;
-        overallsum=overallsum.toFixed(2)
-        document.querySelector(".totall").innerHTML=overallsum
-        
-    });
-});
+
+
+    /* =========================
+       DELETE PRODUCT
+    ========================= */
+
+    document
+        .querySelectorAll(".del")
+        .forEach((button) => {
+
+            button.addEventListener("click", () => {
+
+                const productName =
+                    button.dataset.productName;
+
+
+                cartArray =
+                    cartArray.filter((item) => {
+
+                        return item.productname !== productName;
+
+                    });
+
+
+                /* SAVE */
+
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(cartArray)
+                );
+
+
+                /* RELOAD */
+
+                location.reload();
+
+            });
+
+        });
+
+
+    /* =========================
+       DELIVERY RADIO BUTTONS
+    ========================= */
+
+    document
+        .querySelectorAll(
+            'input[type="radio"]'
+        )
+        .forEach((radio) => {
+
+            radio.addEventListener(
+                "change",
+                () => {
+
+                    /* FIND THIS PRODUCT */
+
+                    const productContainer =
+                        radio.closest(
+                            ".delivery-container-parent"
+                        );
+
+
+                    /* GET DATE HEADING */
+
+                    const deliveryHeading =
+                        productContainer.querySelector(
+                            ".delivery-date-shipping"
+                        );
+
+
+                    /* CHANGE DATE */
+
+                    deliveryHeading.textContent =
+                        `Delivery date: ${radio.dataset.date}`;
+
+
+                    /* UPDATE ORDER SUMMARY */
+
+                    updateSummary();
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderCart();
+
+const placeOrderButton = document.querySelector(".place-order");
+
+placeOrderButton.addEventListener("click", () => {
+  if (cartArray.length === 0) {
+    alert("Your cart is empty. Please add a product before placing an order.");
+    return;
+  }
+    const checkedRadios = document.querySelectorAll(
+        'input[type="radio"]:checked'
+    );
+
+    if (checkedRadios.length < cartArray.length) {
+        alert("Please choose a delivery option for every product.");
+        return;
+    }
     
-    document.querySelectorAll(".del").forEach((btn) => {
-      btn.addEventListener("click", () => {
-  
-          let productName = btn.dataset.productName;
-  
-          cartArray = cartArray.filter((item) => {
-              return item.productname !== productName;
-          });
-  
-          localStorage.setItem("cart", JSON.stringify(cartArray));
-  
-          location.reload();
-      });
-  });
 
-})
+    const itemsTotal = Number(
+        document.querySelector(".summaryprice").textContent
+            .replace("$", "")
+    );
 
-// document.querySelectorAll(".del").forEach((btn)=>{
-//     btn.addEventListener('click',()=>{
-//       let productname=btn.dataset.productName
-//         let newArray=[]
-      
-//         cartArray.forEach((item)=>{
-//           if(productname!==item.name){
-//             newArray.push(item)
-//             cartArray=newArray
-//           }
-//         })
+    const shipping = Number(
+        document.querySelector(".shiping").textContent
+    );
 
-//     })
-// })
+    const tax = Number(
+        document.querySelector(".est-tax").textContent
+            .replace("$", "")
+    );
+
+    const total = Number(
+        document.querySelector(".totall").textContent
+    );
+
+    const orderNumber =
+        "KA-" + Math.floor(100000 + Math.random() * 900000);
+
+    const completedOrder = {
+        orderNumber: orderNumber,
+        itemsTotal: itemsTotal,
+        shipping: shipping,
+        tax: tax,
+        total: total
+    };
+
+    localStorage.setItem(
+        "completedOrder",
+        JSON.stringify(completedOrder)
+    );
+
+    localStorage.removeItem("cart");
+
+    window.location.href = "order-confirmation.html";
+});

@@ -1,121 +1,438 @@
-*{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-div a{
+
+body {
+    background: #fff;
+    color: #222;
+}
+
+div a {
     text-decoration: none;
 }
-.delivery-container input{
-    width: 20px;height: 20px;
-}
+
 
 /* =========================
-   SMALL SCREEN RESPONSIVENESS
-   ========================= */
+   HEADER
+========================= */
 
-   @media (max-width: 767px) {
+.checkout-header {
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
 
-    /* Reduce the body's horizontal padding */
+.checkout-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.checkout-header h2 {
+    margin: 0;
+}
+
+
+/* =========================
+   CART AREA
+========================= */
+
+.display-html {
+    min-height: 400px;
+}
+
+
+/* =========================
+   PRODUCT CARD
+========================= */
+
+.delivery-container-parent {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.cart-product {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    background: white;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.delivery-date-shipping {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+
+/* PRODUCT CONTENT */
+
+.product-content {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+/* PRODUCT IMAGE */
+
+.product-image {
+    width: 180px;
+    height: 180px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+/* PRODUCT INFORMATION */
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #dc3545;
+    margin-bottom: 10px;
+}
+
+.quantity-text {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+
+/* UPDATE / DELETE */
+
+.product-actions {
+    margin-top: 15px;
+}
+
+.update-quantity,
+.del {
+    cursor: pointer;
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+.update-quantity {
+    color: #0d6efd;
+}
+
+.del {
+    color: #dc3545;
+}
+
+.update-quantity:hover,
+.del:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   DELIVERY
+========================= */
+
+.deliveryy {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.delivery-container {
+    width: 100%;
+
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    padding: 20px;
+
+    background: #fafafa;
+}
+
+.delivery-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+
+/* DELIVERY OPTION */
+
+.delivery-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 13px;
+
+    margin-bottom: 8px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.delivery-option:hover {
+    border-color: #aaa;
+    background: #f8f8f8;
+}
+
+.delivery-option input {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.delivery-option label {
+    cursor: pointer;
+    flex: 1;
+}
+
+.delivery-date {
+    font-weight: 500;
+}
+
+.delivery-price {
+    margin-top: 3px;
+}
+
+.delivery-price.free {
+    color: green;
+}
+
+
+/* =========================
+   CHECKOUT SUMMARY
+========================= */
+
+.checkout {
+    padding: 20px;
+}
+
+.order-summary-box {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+
+    padding: 25px;
+
+    background: white;
+
+    position: sticky;
+    top: 20px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+
+/* SUMMARY ROW */
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 0;
+
+    font-size: 16px;
+}
+
+.summary-row > div:last-child {
+    font-weight: 500;
+}
+
+
+/* ORDER TOTAL */
+
+.order-total {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.order-total > div:last-child {
+    font-weight: 700;
+}
+
+
+/* BUTTON */
+
+.place-order-btn {
+    width: 100%;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 14px;
+
+    margin-top: 20px;
+
+    background: #f5c542;
+    color: #222;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.place-order-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================
+   EMPTY CART
+========================= */
+
+.empty-cart {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.empty-cart h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.empty-cart p {
+    color: #666;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 767px) {
+
     body.px-5 {
         padding-left: 10px !important;
         padding-right: 10px !important;
     }
 
-    /* Header */
-    .d-flex.justify-content-between.align-items-center.mt-2 {
+    .checkout-header {
         flex-wrap: wrap;
-        gap: 50px;
+        gap: 10px;
     }
 
-    .d-flex.justify-content-between.align-items-center.mt-2 h1 {
-        font-size: 28px !important;
-        margin: 0;
+    .checkout-header h1 {
+        font-size: 25px;
     }
 
-    .d-flex.justify-content-between.align-items-center.mt-2 h2 {
-        font-size: 20px !important;
-        margin: 0;
+    .checkout-header h2 {
+        font-size: 18px !important;
     }
 
-    .d-flex.justify-content-between.align-items-center.mt-2 i {
-        font-size: 28px !important;
-    }
-
-
-    /* Main row */
-    .row.m-0.p-0.mt-2 {
-        display: block;
+    .checkout-header i {
+        font-size: 25px !important;
     }
 
 
-    /* Cart/products section */
+    /* PRODUCT */
+
     .display-html {
-        width: 100% !important;
-        margin-top: 15px !important;
-        padding-left: 10px !important;
-        padding-right: 10px !important;
-        border-width: 2px !important;
+        width: 100%;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    .cart-product {
+        padding: 15px;
+    }
+
+    .product-content {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 220px;
+    }
+
+    .product-name {
+        font-size: 19px;
     }
 
 
-    /* Checkout summary */
+    /* DELIVERY */
+
+    .delivery-container-parent {
+        margin-bottom: 25px;
+    }
+
+    .delivery-container {
+        padding: 15px;
+    }
+
+
+    /* CHECKOUT */
+
     .checkout {
-        position: static !important;
-        width: 100% !important;
-        margin-top: 20px;
-        border-width: 2px !important;
+        width: 100%;
+        padding: 5px;
     }
 
-
-    /* Order summary box */
-    .checkout > .row > .col-10 {
-        width: 95% !important;
-        margin-top: 20px !important;
-        margin-bottom: 20px !important;
-        border-width: 2px !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
+    .order-summary-box {
+        position: static;
+        width: 100%;
+        padding: 20px;
     }
 
-
-    /* Order Summary heading */
-    .checkout h1 {
-        font-size: 24px !important;
+    .checkout-title {
+        font-size: 23px;
     }
 
-
-    /* Summary rows */
-    .checkout .row.py-2 {
+    .summary-row {
         font-size: 15px;
     }
 
-
-    /* Place order button */
-    .checkout button {
-        font-size: 17px !important;
-        padding-top: 12px !important;
-        padding-bottom: 12px !important;
+    .order-total {
+        font-size: 19px;
     }
 
-
-    /* Product image */
-    .display-html img {
-        max-width: 100%;
-        height: auto;
-    }
-
-
-    /* Product information */
-    .display-html h1,
-    .display-html h2,
-    .display-html h3,
-    .display-html h4 {
-        word-wrap: break-word;
-    }
 }
 
 
-/* Extra-small phones */
+/* =========================
+   VERY SMALL SCREENS
+========================= */
+
 @media (max-width: 480px) {
 
     body.px-5 {
@@ -123,58 +440,40 @@ div a{
         padding-right: 6px !important;
     }
 
-    /* Header becomes easier to fit */
-    .d-flex.justify-content-between.align-items-center.mt-2 {
-        gap: 5px;
+    .checkout-header h1 {
+        font-size: 22px;
     }
 
-    .d-flex.justify-content-between.align-items-center.mt-2 h1 {
-        font-size: 23px !important;
-    }
-
-    .d-flex.justify-content-between.align-items-center.mt-2 h2 {
+    .checkout-header h2 {
         font-size: 16px !important;
     }
 
-    .d-flex.justify-content-between.align-items-center.mt-2 i {
-        font-size: 23px !important;
+    .checkout-header i {
+        font-size: 22px !important;
     }
 
-
-    /* Product container */
-    .display-html {
-        padding: 8px !important;
+    .cart-product {
+        padding: 12px;
     }
 
-
-    /* Make product rows stack vertically */
-    .display-html .row {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+    .product-image {
+        height: 190px;
     }
 
-
-    /* Product image and details */
-    .display-html .col-4,
-    .display-html .col-7,
-    .display-html .col-8,
-    .display-html .col-4 {
-        width: 100% !important;
-        margin-left: 0 !important;
+    .delivery-option {
+        padding: 10px;
     }
 
+    .order-summary-box {
+        padding: 16px;
+    }
 
-    /* Order summary */
-    .checkout > .row > .col-10 {
-        width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+    .summary-row {
+        font-size: 14px;
     }
-    .deliveryy{
-        margin-top: -40px !important;
+
+    .order-total {
+        font-size: 18px;
     }
-    .delivery-date-shipping{
-        font-size: 18px !important;
-        font-weight: 500 !important;
-    }
+
 }

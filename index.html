@@ -1,263 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Karat Jewelry</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="bootstrap-5.3.3-dist/bootstrap-5.3.3-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"/>
-     
 </head>
+
+
 <body>
-    <nav>
-        <div style="display: flex;align-items: center;">
-            <div>
-               <a href="#abt"> <img style="width: 120px;margin-left: 20px;" src=".//assets/logo.png" alt=""></a>
-            </div>
-            <div style="margin-left: -40px;"><a href="#abt"><h1 style="font-size: 30px;margin-top: 1px;">Karat jewelry</h1></a></div>
-        </div>
 
-            <div style="display: flex;justify-content: center;margin-top: 10px;">
-                <ul>
-                    <a href=""><li>Home</li></a>
-                    <a href="#productss"><li>Products</li></a>
-                    <a href="#abt"><li>About us</li></a>
-                </ul>
-            </div>
-            <div style="display:flex; right: 20px;"><a href="#contactt"><button>Contact</button></a>
-               <a href="cart.html"> <div style="position: relative;right: 10%;padding: 5px;border-radius: 20px;">
-                <i style="font-size: 35px;color: rgb(165, 134, 92);" class="bi bi-cart"></i>
-                <h2 style="position: absolute;top: 0px; left: 50%;transform: translate(-50%); font-size: 18px"
-                id="cart-increment"
-                ></h2>
-            </div></a>
-            </div>
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="desktop-nav">
+
+        <a href="#main" class="brand">
+            <img src="./assets/logo.png" alt="Karat Jewelry">
+            <span>Karat Jewelry</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#main">Home</a></li>
+            <li><a href="#productss">Products</a></li>
+            <li><a href="#abt">About</a></li>
+            <li><a href="#contactt">Contact</a></li>
+        </ul>
+
+        <a href="cart.html" class="cart-link">
+            <i class="bi bi-bag"></i>
+            <span id="cart-increment">0</span>
+        </a>
+
     </nav>
 
-    <nav class="navbar  d-flex d-sm-none  " style="position: sticky;top: 0;">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#abt"><img src=".//assets/logo.png" alt="" height="80" ></a>
-    
-        <!-- TOGGLER -->
+
+    <!-- ================= MOBILE NAVBAR ================= -->
+
+    <nav class="mobile-nav navbar">
+
+        <a href="#main" class="mobile-brand">
+            <img src="./assets/logo.png" alt="Karat Jewelry">
+        </a>
+
         <button
-          class="navbar-toggler ms-auto"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mainNav"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
         >
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
-    
-        <!-- NAV LINKS -->
+
         <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link " href="">Home</a>
-            </li>
-    
-            <!-- DROPDOWN -->
-            <li class="nav-item">
-              <a class="nav-link " href="#productss">Product</a>
-            </li>
 
-            <li class="nav-item">
-              <a class="nav-link " href="#abt">About</a>
-            </li>
-    
-            <li class="nav-item">
-              <a class="nav-link" href="#contactt">Contact</a>
-            </li>
+            <ul class="navbar-nav">
 
-            <li class="nav-item">
-                <a class="nav-link " href="cart.html">Cart</a>
-              </li>
-    
-          </ul>
+                <li>
+                    <a href="#main">Home</a>
+                </li>
+
+                <li>
+                    <a href="#productss">Products</a>
+                </li>
+
+                <li>
+                    <a href="#abt">About</a>
+                </li>
+
+                <li>
+                    <a href="#contactt">Contact</a>
+                </li>
+
+                <li>
+                    <a href="cart.html">Cart</a>
+                </li>
+
+            </ul>
+
         </div>
-      </div>
+
     </nav>
-    
 
 
-        <div class="main" id="main">
-        <p>A leader in brass and stainless jewelry manufacturing industry</p>
-        <a href="#productss"><button class="button">Shop now</button></a>
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="main">
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <span class="hero-small">
+                ELEGANCE • QUALITY • TIMELESS
+            </span>
+
+            <h1>
+                Jewelry that makes
+                <span>every moment</span>
+                unforgettable.
+            </h1>
+
+            <p>
+                Discover beautifully crafted gold, silver, bronze
+                and diamond pieces designed to make you shine.
+            </p>
+
+            <a href="#productss" class="hero-btn">
+                Explore Collection
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
         </div>
-                
-        
-        <div class="material" id="mat">
-            <h1>Our materials</h1>
-         <div class="materiall">
-            <div class="item">
-                <div ><img src=".//assets/gold.png" alt=""></div>
-                <h2>Gold</h2>
-            </div>
-            <div class="item">
-                <div><img src=".//assets/silver.png" alt=""></div>
-                <h2 style="margin-top: 20px;">Silver</h2>
-            </div>
-            <div class="item">
-                <div><img src=".//assets/bronze.png" alt=""></div>
-                <h2>Bronze</h2>
-            </div>
-            <div class="item">
-                <div><img style="width: 110%;margin-top: 20px;" src=".//assets/diamond.png" alt=""></div>
-                <h2  style="margin-top: 20px;">Diamond</h2>
-            </div>
-         </div>
+
+    </section>
+
+
+    <!-- ================= MATERIALS ================= -->
+
+    <section class="materials" id="mat">
+
+        <div class="section-heading">
+
+            <span>OUR COLLECTION</span>
+
+            <h2>
+                Crafted from the finest materials
+            </h2>
+
+            <p>
+                Discover the beauty behind every piece we create.
+            </p>
+
         </div>
 
-         <!-- Our available Products -->
 
-         <div class="product-section">
-            <h1>Our products</h1>
-         <div class="product-container js-product-container" id="productss">
-            <!-- <div class="product-card">
-                <div class="product-img">
-                    <img src="./assets/golden-necklace.png" alt=""></div>
-                <div class="product-name">
-                    <h3>Gold necklaces</h3>
+        <div class="materials-grid">
+
+            <div class="material-card">
+
+                <img src="./assets/gold.png" alt="Gold">
+
+                <div>
+                    <h3>Gold</h3>
+                    <p>Timeless elegance</p>
                 </div>
-                <div class="product-price">
-                    <h4>$15.00</h4>
-                </div>
-                <button>Add to cart</button>
+
             </div>
 
 
-            <div class="product-card">
-                <div class="product-img">
-                    <img src="./assets/golden-necklace.png" alt=""></div>
-                <div class="product-name">
-                    <h3>Gold necklaces</h3>
+            <div class="material-card">
+
+                <img src="./assets/silver.png" alt="Silver">
+
+                <div>
+                    <h3>Silver</h3>
+                    <p>Classic sophistication</p>
                 </div>
-                <div class="product-price">
-                    <h4>$15.00</h4>
-                </div>
-                <button>Add to cart</button>
+
             </div>
 
-            <div class="product-card">
-                <div class="product-img">
-                    <img src="./assets/golden-necklace.png" alt=""></div>
-                <div class="product-name">
-                    <h3>Gold necklaces</h3>
+
+            <div class="material-card">
+
+                <img src="./assets/bronze.png" alt="Bronze">
+
+                <div>
+                    <h3>Bronze</h3>
+                    <p>Warm and distinctive</p>
                 </div>
-                <div class="product-price">
-                    <h4>$15.00</h4>
-                </div>
-                <button>Add to cart</button>
+
             </div>
 
-            <div class="product-card">
-                <div class="product-img">
-                    <img src="./assets/golden-necklace.png" alt=""></div>
-                <div class="product-name">
-                    <h3>Gold necklaces</h3>
+
+            <div class="material-card">
+
+                <img src="./assets/diamond.png" alt="Diamond">
+
+                <div>
+                    <h3>Diamond</h3>
+                    <p>Brilliant luxury</p>
                 </div>
-                <div class="product-price">
-                    <h4>$15.00</h4>
-                </div>
-                <button>Add to cart</button>
+
             </div>
 
-            <div class="product-card">
-                <div class="product-img">
-                    <img src="./assets/golden-necklace.png" alt=""></div>
-                <div class="product-name">
-                    <h3>Gold necklaces</h3>
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <section class="products-section" id="productss">
+
+        <div class="section-heading">
+
+            <span>SHOP KARAT</span>
+
+            <h2>
+                Our signature pieces
+            </h2>
+
+            <p>
+                Find something beautiful for every occasion.
+            </p>
+
+        </div>
+
+
+        <!-- JS inserts products here -->
+
+        <div class="product-container js-product-container"></div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about-section" id="abt">
+
+        <div class="about-image">
+
+            <img
+                src="./assets/about.png"
+                alt="Karat Jewelry"
+            >
+
+        </div>
+
+
+        <div class="about-content">
+
+            <span>ABOUT KARAT</span>
+
+            <h2>
+                Jewelry made to
+                <span>last a lifetime.</span>
+            </h2>
+
+            <p>
+                Karat Jewelry is a premium jewelry brand dedicated
+                to crafting timeless elegance through high-quality
+                gold, silver, bronze and diamond pieces.
+            </p>
+
+            <p>
+                From elegant necklaces and bracelets to rings,
+                earrings and custom designs, every piece is created
+                to celebrate life's most special moments.
+            </p>
+
+            <a href="#productss">
+                Discover our collection
+                <i class="bi bi-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact-section" id="contactt">
+
+        <div class="contact-content">
+
+            <span>GET IN TOUCH</span>
+
+            <h2>
+                Let's create something
+                <span>beautiful.</span>
+            </h2>
+
+            <p>
+                Have a question or looking for something special?
+                Send us a message and we'll be happy to help.
+            </p>
+
+
+            <form>
+
+                <input
+                    type="text"
+                    placeholder="Your name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    placeholder="Your email"
+                    required
+                >
+
+                <input
+                    type="tel"
+                    placeholder="Phone number"
+                    required
+                >
+
+                <textarea
+                    placeholder="Your message"
+                    required
+                ></textarea>
+
+                <button type="submit">
+                    Send Message
+                    <i class="bi bi-arrow-right"></i>
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="contact-image">
+
+            <img
+                src="./assets/contact us.jpeg"
+                alt="Contact Karat Jewelry"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <h2>Karat Jewelry</h2>
+
+                <p>
+                    A leader in brass and stainless jewelry
+                    manufacturing, creating timeless pieces
+                    for unforgettable moments.
+                </p>
+
+                <div class="socials">
+
+                    <a href="#">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+
                 </div>
-                <div class="product-price">
-                    <h4>$15.00</h4>
-                </div>
-                <button>Add to cart</button>
+
             </div>
-             -->
-
-         </div>
-         </div> 
-
-        <!-- about -->
-         <div class="about" id="abt">
-            <div class="abt" >
-                <div class="text">
-                    <h1>About Karat Jewelry</h1>
-                    <p>Karat jewelry is a premium jewelry brand dedicated to crafting timeless elegance through high-quality gold,silver,bronze and diamond pieces.We specialize in beautifully designed rings,necklaces,bracelets,earrings and custom-made jewelry that celebrates life's most special moments.</p>
-                </div>
-                <div class="image">
-                    <img src=".//assets/about.png" alt="">
-                </div>
-            </div>
-         </div>
 
 
-        
+            <div>
 
-         <!-- contact -->
-            <div class="parent">
-                <div class="contact-container" id="contactt">
-                        <div style="width: 100%;">
-                            <h2>Contact Us</h2>
-                            <form action="">
-                            <div class="inp" style="display: flex;flex-direction: column;row-gap: 20px;">
-                                <input type="text" placeholder="Name" required >
-                                <input type="email" placeholder="Email" required>
-                                <input type="number" placeholder="Phone" required>
-                                <input style="height: 60px;" type="text" placeholder="Message" required>
-                            </div>
-                            <button type="submit" class="contact-btn">Send</button>
-                            </form>
-                        </div>
-                    <div style="width: 100%;"><img src=".//assets/contact us.jpeg" alt=""></div>
-                </div>
+                <h3>Explore</h3>
+
+                <a href="#main">Home</a>
+                <a href="#productss">Products</a>
+                <a href="#abt">About</a>
+                <a href="#contactt">Contact</a>
+
             </div>
 
-            <!-- footer -->
 
-            <footer class="footer">
-                <div class="footer-container">
-              
-                  <div class="footer-section">
-                    <h2 class="logo">Karat Jewelry</h2>
-                    <p>A leader in brass and stainless jewelry manufacturing industry.</p>
-                  </div>
-              
-                  <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                      <li><a href="">Home</a></li>
-                      <li><a href="#productss">Product</a></li>
-                      <li><a href="#abt">About</a></li>
-                      <li><a href="#contactt">Contact</a></li>
-                    </ul>
-                  </div>
-              
-                  <div class="footer-section">
-                    <h3>Our Materials</h3>
-                    <ul>
-                      <li><a href="#mat">Gold</a></li>
-                      <li><a href="#mat">Diamond</a></li>
-                      <li><a href="#mat">Silver</a></li>
-                      <li><a href="#mat">Bronze</a></li>
-                    </ul>
-                  </div>
-              
-                  <div class="footer-section">
-                    <h3>Contact</h3>
-                    <p>Email: support@karatjewels.com</p>
-                    <p>Phone: <a style="text-decoration: none;color: white;" href="tel:+2347081564950">+234 708 156 4950</a></p>
-                    <p>Location: Lagos, Nigeria</p>
-                  </div>
-              
-                </div>
-              
-                <div class="copyright">
-                  © 2025 Karat Jewelry. All rights reserved.
-                </div>
-              </footer>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="module" src="index.js"></script>
+            <div>
+
+                <h3>Materials</h3>
+
+                <a href="#mat">Gold</a>
+                <a href="#mat">Silver</a>
+                <a href="#mat">Bronze</a>
+                <a href="#mat">Diamond</a>
+
+            </div>
+
+
+            <div>
+
+                <h3>Contact</h3>
+
+                <p>support@karatjewels.com</p>
+                <p>+234 708 156 4950</p>
+                <p>Lagos, Nigeria</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+            © 2026 Karat Jewelry. All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <!-- Bootstrap -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <!-- Your JS -->
+
+    <script
+        type="module"
+        src="index.js">
+    </script>
+
 </body>
+
 </html>

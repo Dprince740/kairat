@@ -1,91 +1,208 @@
 // export { cartArray }
-import { products } from './product.js'
-
-let cart=document.getElementById("cart-increment")
-let publish=''
-// let cartArray=[]
-let cartArray = JSON.parse(localStorage.getItem('cart')) || [];
-
-console.log("INDEX CART:", cartArray);
-
-products.forEach((product)=>{
-    publish+=`
-     <div class="product-card">
-                <div class="product-img">
-                    <img class="imagee" src="${product.image}" alt=""></div>
-                <div class="product-name">
-                    <h3>${product.name}</h3>
-                </div>
-                <div class="product-price">
-                    <h4>$${product.price}</h4>
-                </div>
-                <h6 class="adding" style="opacity:0">Added &#10003</h6>
-                <button class="adder" data-product-name="${product.name}">Add to cart</button>
-            </div>`
-    console.log(publish)
-    // console.log(product)
-})
-
-document.querySelector(".js-product-container").innerHTML=publish
+import { products } from "./product.js";
 
 
-document.querySelectorAll(".adder").forEach((button)=>{
-    button.addEventListener("click",()=>{
-        // alert("hello")
-        // let productCard=button.closest(".product-card")
-        // let addedText=productCard.querySelector(".adding")
-        // if(button.innerHTML==="Add to cart"){
-        //     button.innerHTML="Adding..."
-        //     setTimeout(()=>{
-        //         // alert("Product Added" )
-        //       addedText.classList.add("inserted")
-        //         button.innerHTML="Remove from cart "
-        //     },1000)
-        //     setTimeout(()=>{
-        //         // alert("Product Added" )
-        //       addedText.classList.remove("inserted")
-        //       addedText.classList.add("time")
-        //         button.innerHTML="Remove from cart "
-        //     },3000)
-        // }else{
-        //     button.innerHTML="Removing..."
-        //     setTimeout(()=>{
-        //         alert("Product Removed")
-        //         button.innerHTML="Add to cart"
-        //     },2000)
-        // }
-        let matching;
-        let namee=button.dataset.productName
-        cartArray.forEach((item)=>{
-            if(namee===item.productname){
-                matching=item
-            }
-            // console.log(matching)
-        })
-        if(matching){
-            matching.quantity+=1
-        }else{
-            cartArray.push({
-                productname:namee,
-                quantity:1
-            })
+/* =========================
+   CART
+========================= */
+
+const cart = document.getElementById("cart-increment");
+
+let cartArray =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+
+/* =========================
+   DISPLAY CART QUANTITY
+========================= */
+
+function updateCartNumber() {
+
+    let cartQuantity = 0;
+
+    cartArray.forEach((item) => {
+
+        cartQuantity += Number(item.quantity);
+
+    });
+
+    cart.innerText = cartQuantity;
+
+    localStorage.setItem(
+        "cartquantity",
+        JSON.stringify(cartQuantity)
+    );
+}
+
+
+/* Display saved quantity
+   when page loads */
+
+updateCartNumber();
+
+
+/* =========================
+   DISPLAY PRODUCTS
+========================= */
+
+let publish = "";
+
+
+products.forEach((product) => {
+
+    publish += `
+
+        <div class="product-card">
+
+            <div class="product-img">
+
+                <img
+                    class="imagee"
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
+
+            </div>
+
+
+            <div class="product-name">
+
+                <h3>
+                    ${product.name}
+                </h3>
+
+            </div>
+
+
+            <div class="product-price">
+
+                <h4>
+                    $${Number(product.price).toFixed(2)}
+                </h4>
+
+            </div>
+
+
+            <h6
+                class="adding"
+                style="opacity:0;"
+            >
+                Added &#10003;
+            </h6>
+
+
+            <button
+                class="adder"
+                data-product-name="${product.name}"
+            >
+                Add to cart
+            </button>
+
+        </div>
+
+    `;
+
+});
+
+
+document.querySelector(
+    ".js-product-container"
+).innerHTML = publish;
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+document.querySelectorAll(".adder").forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+
+        const productName =
+            button.dataset.productName;
+
+
+        /* Find product */
+
+        const matching =
+            cartArray.find((item) => {
+
+                return item.productname === productName;
+
+            });
+
+
+        /* =========================
+           ALREADY IN CART
+        ========================= */
+
+        if (matching) {
+
+            matching.quantity += 1;
+
         }
-        localStorage.setItem("cart",JSON.stringify(cartArray))
-
-    console.log('hello',localStorage.getItem('cart'))
 
 
-        let cartQuantity=0
-        // cart.innerHTML=cartQuantity
-        cartArray.forEach((item)=>{
-            cartQuantity+=item.quantity
-            cart.innerText=cartQuantity
-            localStorage.setItem("cartquantity",JSON.stringify(cartQuantity))
-        })
-    
-        console.log(cartArray)
+        /* =========================
+           NEW PRODUCT
+        ========================= */
 
-       
+        else {
 
-    })
-})
+            cartArray.push({
+
+                productname: productName,
+
+                quantity: 1
+
+            });
+
+        }
+
+
+        /* =========================
+           SAVE CART
+        ========================= */
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cartArray)
+        );
+
+
+        /* Update cart number */
+
+        updateCartNumber();
+
+
+        /* =========================
+           SHOW ADDED MESSAGE
+        ========================= */
+
+        const productCard =
+            button.closest(".product-card");
+
+
+        const addedText =
+            productCard.querySelector(".adding");
+
+
+        addedText.style.opacity = "1";
+
+
+        setTimeout(() => {
+
+            addedText.style.opacity = "0";
+
+        }, 1500);
+
+
+        console.log(
+            "CART:",
+            cartArray
+        );
+
+    });
+
+});
